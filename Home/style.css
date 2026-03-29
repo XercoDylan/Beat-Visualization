@@ -2,21 +2,41 @@
     font-family: "DM Sans", sans-serif;
 }
 
+#header {
+    outline: auto;
+    width: 100%;
+    height: 20%;
+    margin-top: 5%;
+}
+
+#stories {
+    outline: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 60%;
+}
+
 body {
     background: linear-gradient(to left, rgb(29, 28, 28) 10%, rgb(12, 12, 12) 90%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 10px;
+    justify-content: top;
+    align-items: center;
+
+    gap: 60px;
+    height: 100vh;
 }
 
 h1 {
     color: rgb(255, 153, 1);
     text-align: center;
     font-weight: 900;
-    font-size: 100px;
-    margin-bottom: 0px;
-    margin-top: 0px;
+    font-size: 8vw;
+    margin: 0px;
 }
 
 
@@ -24,12 +44,82 @@ h2 {
     color: rgb(255, 195, 105);
     text-align: center;
     font-weight: 900;
-    font-size: 25px;
+    font-size: 2.5vw;
+    margin: 0px;
+}
 
-    margin-top: 0px;
+h3 {
+    color: rgb(255, 153, 1);
+    text-align: center;
+    font-weight: 900;
+    font-size: 3vw;
+    margin: 0px;
+    text-decoration: underline
+}
+
+p {
+    font-weight: 900;
+    font-size: 1.5vw;
+    margin: 0px;
+    color: rgb(255, 255, 255);
 }
 
 button {
+    width: 30%;
+    height: 30%;
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 153, 1);
+    border-radius: 10px;
+}
+
+#buttons {
+    outline: auto;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#progress {
+    outline: auto;
+    width: 100%;
+    height: 10%;
+    position: relative;
+}
+
+#bar {
     width: 50%;
-    height: 80%;
+    height: 15%;
+    background-color:white;
+    border-radius: 50px;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+
+}
+
+.bardot {
+    background-color: rgb(255, 153, 1);
+    width: 2.5%;
+    height: 60%;
+    border-radius: 50%;
+    font-size: 1.8vw;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 2;
+}
+
+button {
+    width: 10%;
+    height: 100%;
+    font-size: 2vw;
 }

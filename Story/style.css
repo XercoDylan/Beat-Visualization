@@ -9,9 +9,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* Prevents scrollbars if things get weird */
     background-color: rgb(29, 28, 28);
-    /* Your dark background */
 }
 
 
@@ -19,6 +17,4 @@ body, html {
     width: 100vw;
     height: 100vh;
     display: block;
-    /* Removes tiny scrollbar gap at the bottom */
-
 }

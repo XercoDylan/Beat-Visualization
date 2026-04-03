@@ -56,7 +56,7 @@ const data = {
     },
 
     "Explode": {
-        "children": ["Break My Soul", "Energy"],
+        "children": ["Break My Soul"],
         "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
         "time": 29,
         "year": 2014,

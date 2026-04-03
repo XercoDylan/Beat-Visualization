@@ -292,9 +292,18 @@ export class Canvas {
 
     }
 
+    countLeaves(songName) {
+        const children = this.songs.data[songName]["children"]
+        if (children.length === 0) return 1
+        return children.reduce((sum, child) => sum + this.countLeaves(child), 0)
+    }
+
     render_connection(songName, time, xmult, parent_pos) {
 
-        const pos = [(canvas.width/2 - LINE_WIDTH/2) + (LINE_WIDTH * xmult), canvas.height/2 + ((time/TIME_PER_GRID) * GRID_SIZE)]
+        const pos = [
+            (canvas.width/2 - LINE_WIDTH/2) + (LINE_WIDTH * xmult),
+            canvas.height/2 + ((time/TIME_PER_GRID) * GRID_SIZE)
+        ]
 
         this.songsToRender.push({
             "pos": pos,
@@ -315,26 +324,25 @@ export class Canvas {
         return pos
     }
 
-    render_connections(current_song , xmult=0.5, parent_pos=null) {
+    render_connections(current_song, xmin=0, xmax=1, parent_pos=null) {
 
-        console.log(current_song)
+        const xmult = (xmin + xmax) / 2
         const current_pos = this.render_connection(current_song, this.songs.data[current_song]["time"], xmult, parent_pos)
-        const children_length = this.songs.data[current_song]["children"].length
+        const children = this.songs.data[current_song]["children"]
 
-       this.depth = Math.max(this.depth, this.songs.data[current_song]["time"]/TIME_PER_GRID + 1)
+        this.depth = Math.max(this.depth, this.songs.data[current_song]["time"]/TIME_PER_GRID + 1)
 
-        if (children_length == 0) {
-            return
+        if (children.length === 0) return
+
+        const totalLeaves = children.reduce((sum, child) => sum + this.countLeaves(child), 0)
+        let cursor = xmin
+
+        for (const child of children) {
+            const leaves = this.countLeaves(child)
+            const childXmax = cursor + (xmax - xmin) * leaves / totalLeaves
+            this.render_connections(child, cursor, childXmax, current_pos)
+            cursor = childXmax
         }
-
-
-
-        for (let i = 0; i < children_length; i++) {
-            const children = this.songs.data[current_song]["children"][i]
-            this.render_connections(children , 0.5/children_length + (i * 1/children_length), current_pos)
-        }
-
-
 
     }
 

@@ -3,13 +3,16 @@ const MIN_ZOOM = 0.1
 const ZOOM_SENSITIVITIY = 0.1
 const GRID_SIZE = 250
 const LINE_WIDTH = 1000
-const POP_UP_WIDTH = 800
 const TIME_ARROW_OFFSET = 100
 const TIME_OFFSET = 50
-const START_TIME = 1990
+const START_TIME = 1985
 const TITLE_OFFSET = 150
 const VERTEX_RADIUS = 60
 const TIME_PER_GRID = 5
+const POPUP_W = 500
+const POPUP_H = 380
+const POPUP_ARROW_GAP = 50
+const POPUP_PAD = 20
 
 export class Canvas {
     constructor(canvas, context, songs) {
@@ -17,7 +20,7 @@ export class Canvas {
         this.canvas = canvas
         this.songs = songs
         this.dragging = false
-        
+
         this.songsToRender = []
         this.songsPostions = {}
         this.currentSelected = null
@@ -27,12 +30,12 @@ export class Canvas {
         this.cameraY = 0
         this.depth = 0
         this.currentSongs = {
-            
+
         }
 
         songs.preloadImages(this)
         this.resize()
-        
+
 
 
         window.addEventListener('wheel', (e) => {
@@ -65,7 +68,20 @@ export class Canvas {
     click(e) {
         const x = ((e.clientX - this.cameraX)) / this.zoom;
         const y = ((e.clientY - this.cameraY)) / this.zoom;
-        
+
+        // Check if X (close) button was clicked on the open popup
+        if (this.currentSelected) {
+            const pos = this.currentSelected[1]
+            const boxX = pos[0] + VERTEX_RADIUS + POPUP_ARROW_GAP
+            const boxTop = pos[1] - POPUP_H / 2
+            const closeX = boxX + POPUP_W - POPUP_PAD
+            const closeY = boxTop + POPUP_PAD
+            if (((x - closeX) ** 2 + (y - closeY) ** 2) ** 0.5 <= 12) {
+                this.currentSelected = null
+                this.draw()
+                return
+            }
+        }
 
         for (const songName in this.songsPostions) {
             const songPos = this.songsPostions[songName]
@@ -77,7 +93,7 @@ export class Canvas {
                 this.draw()
                 break
             }
-            
+
         }
     }
 
@@ -87,7 +103,7 @@ export class Canvas {
         this.draw()
     }
 
-    scale(e) { 
+    scale(e) {
 
         const zoomAmount = e.deltaY < 0 ? 1 + ZOOM_SENSITIVITIY : 1 - ZOOM_SENSITIVITIY;
         let newZoom = this.zoom * zoomAmount;
@@ -113,7 +129,7 @@ export class Canvas {
 
         this.context.lineWidth = 0.5
         this.context.strokeStyle =  '#ffffff'
-        
+
         for (let i = 0; i <= this.depth; i++ ) {
             this.context.beginPath()
             this.context.moveTo(withStart, startY + (GRID_SIZE * i))
@@ -127,7 +143,7 @@ export class Canvas {
             this.context.textBaseline = "middle";
         }
 
-        
+
     }
 
     create_time_arrow() {
@@ -150,48 +166,91 @@ export class Canvas {
         this.context.stroke()
     }
 
+    wrapText(text, x, y, maxWidth, lineHeight) {
+        if (!text) return
+        const words = text.split(' ')
+        let line = ''
+        for (let i = 0; i < words.length; i++) {
+            const testLine = line + words[i] + ' '
+            const metrics = this.context.measureText(testLine)
+            if (metrics.width > maxWidth && i > 0) {
+                this.context.fillText(line, x, y)
+                line = words[i] + ' '
+                y += lineHeight
+            } else {
+                line = testLine
+            }
+        }
+        this.context.fillText(line, x, y)
+    }
 
     render_popUp() {
         const songName = this.currentSelected[0]
+        const songData = this.songs.data[songName]
+        const pos = this.currentSelected[1]
+
+        const boxX = pos[0] + VERTEX_RADIUS + POPUP_ARROW_GAP
+        const boxTop = pos[1] - POPUP_H / 2
+        const boxBottom = pos[1] + POPUP_H / 2
+
+        // Popup shape with arrow pointer
         this.context.fillStyle = "rgb(255, 255, 255)"
         this.context.lineWidth = 2
-        this.context.strokeStyle =  '#000000'
+        this.context.strokeStyle = '#000000'
         this.context.beginPath()
-        this.context.moveTo(this.currentSelected[1][0] + VERTEX_RADIUS, this.currentSelected[1][1])
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50, this.currentSelected[1][1] + 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50, this.currentSelected[1][1] + 50 + 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50 + 300, this.currentSelected[1][1] + 50 + 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50 + 300, this.currentSelected[1][1]  - 50 - 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50 , this.currentSelected[1][1]  - 50 - 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS + 50 , this.currentSelected[1][1] - 50)
-        this.context.lineTo(this.currentSelected[1][0] + VERTEX_RADIUS, this.currentSelected[1][1])
+        this.context.moveTo(pos[0] + VERTEX_RADIUS, pos[1])
+        this.context.lineTo(boxX, pos[1] + 30)
+        this.context.lineTo(boxX, boxBottom)
+        this.context.lineTo(boxX + POPUP_W, boxBottom)
+        this.context.lineTo(boxX + POPUP_W, boxTop)
+        this.context.lineTo(boxX, boxTop)
+        this.context.lineTo(boxX, pos[1] - 30)
+        this.context.lineTo(pos[0] + VERTEX_RADIUS, pos[1])
         this.context.fill()
         this.context.stroke()
 
-        this.context.fillStyle ='#ff0000' 
+        // Close (X) button
+        const closeX = boxX + POPUP_W - POPUP_PAD
+        const closeY = boxTop + POPUP_PAD
+        this.context.fillStyle = '#ff0000'
         this.context.beginPath()
-        this.context.arc(this.currentSelected[1][0] + VERTEX_RADIUS + 20 + 300 , this.currentSelected[1][1] - 75, 12, 0, Math.PI * 2)
+        this.context.arc(closeX, closeY, 12, 0, Math.PI * 2)
         this.context.fill()
         this.context.stroke()
-
-
         this.context.fillStyle = "white"
-        this.context.font = "15px Roboto";
+        this.context.font = "bold 13px Roboto"
         this.context.textAlign = "center"
-        this.context.textBaseline = "middle";
-        this.context.fillText("X" ,this.currentSelected[1][0] + VERTEX_RADIUS + 20 + 300 , this.currentSelected[1][1] - 75);
+        this.context.textBaseline = "middle"
+        this.context.fillText("X", closeX, closeY)
 
-        this.context.font = "30px Roboto";
+        // Album image (top right)
+        const imgSize = 80
+        const imgX = boxX + POPUP_W - POPUP_PAD - imgSize
+        const imgY = boxTop + POPUP_PAD + 30
+        this.context.drawImage(songData["image"], imgX, imgY, imgSize, imgSize)
+
+        // Song name
         this.context.fillStyle = "black"
-        this.context.fillText("Song Name" ,this.currentSelected[1][0] + VERTEX_RADIUS + 150  , this.currentSelected[1][1] - 55)
-        this.context.fillText("Artist, Year" ,this.currentSelected[1][0] + VERTEX_RADIUS + 150  , this.currentSelected[1][1] - 15)
-        this.context.fillText("Location" ,this.currentSelected[1][0] + VERTEX_RADIUS + 150  , this.currentSelected[1][1] + 25)
-        this.context.fillText("List of Samples" ,this.currentSelected[1][0] + VERTEX_RADIUS + 150  , this.currentSelected[1][1] + 65)
+        this.context.font = "bold 22px Roboto"
+        this.context.textAlign = "left"
+        this.context.textBaseline = "top"
+        this.context.fillText(songName, boxX + POPUP_PAD, boxTop + POPUP_PAD)
 
-        const imageSizeX = VERTEX_RADIUS + 30
-        const imageSizeY = VERTEX_RADIUS + 30
+        // Year
+        this.context.font = "16px Roboto"
+        this.context.fillStyle = "#555555"
+        this.context.fillText(String(songData["year"]), boxX + POPUP_PAD, boxTop + POPUP_PAD + 32)
 
-        this.context.drawImage(this.songs.data[songName]["image"], this.currentSelected[1][0] + VERTEX_RADIUS + 300  - imageSizeX/2 , this.currentSelected[1][1]  - imageSizeY/2 , imageSizeX, imageSizeY)
+        // Description (starts below the image area)
+        this.context.font = "13px Roboto"
+        this.context.fillStyle = "#222222"
+        this.wrapText(
+            songData["description"] || "",
+            boxX + POPUP_PAD,
+            boxTop + POPUP_PAD + 120,
+            POPUP_W - POPUP_PAD * 2,
+            19
+        )
     }
 
     render_songs() {
@@ -205,7 +264,7 @@ export class Canvas {
             } else {
                 this.context.fillStyle = "white"
             }
-            
+
             this.context.strokeStyle = "transparent"
 
             this.context.beginPath()
@@ -230,7 +289,7 @@ export class Canvas {
         }
 
         this.songsToRender = []
-        
+
     }
 
     render_connection(songName, time, xmult, parent_pos) {
@@ -268,7 +327,7 @@ export class Canvas {
             return
         }
 
-        
+
 
         for (let i = 0; i < children_length; i++) {
             const children = this.songs.data[current_song]["children"][i]
@@ -276,12 +335,12 @@ export class Canvas {
         }
 
 
-        
+
     }
 
     render_title() {
         this.context.fillStyle = "rgb(255, 153, 1)"
-        this.context.font = "bold 50px sans-serif"; 
+        this.context.font = "bold 50px sans-serif";
         this.context.fillText("Genealogy and Evolution of the Triggerman Beat",canvas.width/2,canvas.height/2 - TITLE_OFFSET);
         this.context.textAlign = "center"
         this.context.textBaseline = "middle";
@@ -294,7 +353,7 @@ export class Canvas {
 
         this.context.scale(devicePixelRatio, devicePixelRatio)
 
-        
+
         this.context.scale(this.zoom, this.zoom)
 
         this.context.translate(this.cameraX/this.zoom, this.cameraY/this.zoom)
@@ -310,14 +369,14 @@ export class Canvas {
         if (this.currentSelected != null) {
             this.render_popUp()
         }
-        
 
 
 
 
-        
-    }   
-    
+
+
+    }
+
     resize() {
 
         this.canvas.width = window.innerWidth * devicePixelRatio

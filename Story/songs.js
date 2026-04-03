@@ -1,27 +1,63 @@
 const data = {
-    "top1": {
-        "children": ["top2"],
+    "Drag Rap": {
+        // Reordered children to align with their future branches
+        "children": ["Wipe Me Down", "Back That Azz Up", "Where Dey At", "Gangsta Walk"],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
         "time": 0
     },
-    
-    "top2": {
-        "children": ["top3","top3_1", "top3_2"],
-        "time": 1
+
+    "Wipe Me Down": {
+        "children": ["Whatchu Kno 'Bout Me"],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 21
     },
 
-    "top3_1" : {
-        "children" : [],
-        "time": 2
-    },
-    
-    "top3_2" : {
-        "children" : [],
-        "time": 2
+    "Whatchu Kno 'Bout Me": {
+        "children": [],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 38
     },
 
-    "top3" : {
-        "children" : [],
-        "time": 2
+    "Back That Azz Up": {
+        "children": [],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 12
+    },
+
+    "Where Dey At": {
+        "children": ["Clap For Em"],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 5
+    },
+
+    "Clap For Em": {
+        "children": [],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 34
+    },
+
+    "Gangsta Walk": {
+        "children": ["Explode"],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 5
+    },
+
+    "Explode": {
+        "children": ["Break My Soul", "Energy"],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 28
+    },
+
+    "Break My Soul": {
+        "children": [],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 36
+    },
+
+    "Energy": {
+        "children": [],
+        "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
+        "time": 36
     }
 }
 
@@ -29,13 +65,18 @@ const data = {
 export class Songs {
     constructor() {
         this.data = data
-        this.preloadImages()
     }
 
-    preloadImages() {
+    preloadImages(canvas) {
         for (const songName in data) {
+
             const img = new Image();
-            img.src = 'https://qodeinteractive.com/magazine/wp-content/uploads/2020/06/8-Tyler-the-Creator.jpg';
+
+            img.onload = () =>  {
+                canvas.draw()
+            }
+            
+            img.src = data[songName]["image"]
             data[songName]["image"] = img
         }
 

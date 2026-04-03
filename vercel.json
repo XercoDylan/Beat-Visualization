@@ -1,7 +1,6 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/api/index.py" },
-    { "src": "/story", "dest": "/api/index.py" },
-    { "handle": "filesystem" }
+  "redirects": [
+    { "source": "/", "destination": "/Home/home.html", "permanent": false },
+    { "source": "/story", "destination": "/Story/story.html", "permanent": false }
   ]
 }

@@ -10,7 +10,7 @@ const TITLE_OFFSET = 150
 const VERTEX_RADIUS = 60
 const TIME_PER_GRID = 5
 const POPUP_W = 500
-const POPUP_H = 380
+const POPUP_H = 280
 const POPUP_ARROW_GAP = 50
 const POPUP_PAD = 20
 

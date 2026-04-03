@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+
+app.mount("/Home", StaticFiles(directory="Home"), name="home")
+app.mount("/Story", StaticFiles(directory="Story"), name="story")
 
 @app.get("/")
 async def read_index():

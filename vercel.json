@@ -1,6 +1,10 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/Home/home.html", "permanent": false },
-    { "source": "/story", "destination": "/Story/story.html", "permanent": false }
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "{Home,Story,Assets}/**"
+    }
+  },
+  "routes": [
+    { "src": "/(.*)", "dest": "/api/index.py" }
   ]
 }

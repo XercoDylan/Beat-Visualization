@@ -1,9 +1,13 @@
 {
-  "functions": {
-    "api/index.py": {
-      "includeFiles": "{Home,Story,Assets}/**"
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "includeFiles": ["Home/**", "Story/**", "Assets/**"]
+      }
     }
-  },
+  ],
   "routes": [
     { "src": "/(.*)", "dest": "/api/index.py" }
   ]

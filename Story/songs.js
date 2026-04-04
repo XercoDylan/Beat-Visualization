@@ -1,9 +1,10 @@
 const data = {
     "Drag Rap": {
-        "children": ["Wipe Me Down", "Back That Azz Up", "Where Dey At", "Gangsta Walk"],
+        "children": ["Wipe Me Down", "Back That Azz Up", "Where Dey At", "Gangsta Walk", "Explode"],
         "image": "https://images.genius.com/24cabdbec471fa5395717ed9c79d3e9a.499x506x1.jpg",
         "time": 1,
         "year": 1986,
+        "artist": "The Showboys",
         "description": "This track serves as the starting point for this genre. Two teenagers from Queens make this song as a parody of the 1950s police drama Dragnet. The song flopped in New York but migrated South on cassette tapes, where it became the foundation of an entire genre. Listen for the TR-808 drums, the xylophone, and the looped synth riff. These are the stems that will be chopped and looped for the subsequent four decades."
     },
 
@@ -12,6 +13,7 @@ const data = {
         "image": "https://i.discogs.com/8XaEVETtOiyRcptgkkAL_DrhpNigfmRvaeiCRHluZjI/rs:fit/g:sm/q:90/h:600/w:578/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIxMTMz/OTctMTM5NDkzNTAy/NS04NTQwLmpwZWc.jpeg",
         "time": 22,
         "year": 2007,
+        "artist": "Foxx, Boosie Badazz & Webbie",
         "description": "This mid-2000s Louisiana staple demonstrates the beat's influence bleeding out of New Orleans into neighboring Baton Rouge. It bridges the gap between high-BPM club bounce and the modern, heavier Southern trap sound. A frequent inclusion in many club sets and playlists to this day, \"Wipe Me Down\" is a pivotal track that has shaped the sound of music nationwide. Listen for the call-and-response of the Bounce Sound, and the \"Drag Rap\" sample in the drum fill before each section change."
     },
 
@@ -20,14 +22,16 @@ const data = {
         "image": "https://i1.sndcdn.com/artworks-tNEZOPArDhPC4PWH-Zbn65Q-t500x500.png",
         "time": 39,
         "year": 2024,
+        "artist": "Glorilla ft Sexyy Red",
         "description": "This track demonstrates the multi-generational game of telephone that is sampling. This modern crunk anthem directly samples Boosie's \"Wipe Me Down,\" recycling the Baton Rouge interpretation of the Bounce rhythm for an entirely new generation. Listen for the bassline and synth from Wipe Me Down and the chant style delivery almost 40 years after Drag Rap was created."
     },
 
     "Back That Azz Up": {
-        "children": [],
+        "children": ["Clap For Em"],
         "image": "https://i.scdn.co/image/ab67616d0000b273683fee123a35b36d53f21a58",
         "time": 14,
         "year": 1999,
+        "artist": "Juvenile",
         "description": "\"Back That Azz Up\" is a track often credited for bringing New Orleans bounce into the national consciousness. Upon release in 1999, this song became inescapable in the club for much of the next decade, and is included in many DJ sets to this day. The Triggerman sample is present throughout the track, and you can hear the characteristic call and response of the Bounce genre in the chorus."
     },
 
@@ -36,6 +40,7 @@ const data = {
         "image": "https://f4.bcbits.com/img/a1678121897_16.jpg",
         "time": 6,
         "year": 1991,
+        "artist": "MC T Tucker & DJ Irv",
         "description": "Widely considered the first New Orleans Bounce track, this song marks the moment Triggerman becomes a distinct musical movement. At parties, DJ Irv would isolate and loop the Triggerman drums on repeat while MC T Tucker delivered call and response chants over the top. Listen for the live turntablism and the shift toward higher energy, dance oriented music."
     },
 
@@ -44,14 +49,16 @@ const data = {
         "image": "https://i1.sndcdn.com/artworks-V6bgWPcfWWhg-0-t500x500.jpg",
         "time": 35,
         "year": 2020,
+        "artist": "Lil Wayne",
         "description": "A victory lap for Bounce, \"Clap For Em\" is New Orleans artist Lil' Wayne's homage to the genre's biggest hits. This song directly samples not only \"Drag Rap\", but also directly samples \"Where Dey At\" and \"Back That Azz Up\" to pay respects to the lineage of the genre. Listen for the drums and accompaniment that constantly shift to reflect different tracks in the genre's history."
     },
 
     "Gangsta Walk": {
-        "children": ["Explode"],
+        "children": [],
         "image": "https://upload.wikimedia.org/wikipedia/en/4/4d/Coolio_-_Gangsta_Walk.jpg",
         "time": 3,
         "year": 1988,
+        "artist": "DJ Spanish Fly",
         "description": "This is the crucial geographic bridge in our history, representing the earliest known example of \"Drag Rap\" taking root in the south. In the late 80s, DJ Spanish Fly adopted \"Drag Rap\", including the instrumental on his mixtapes and sampling it on a few of his songs. Soon, the so called Triggerman beat was the soundtrack to Memphis' signature gangster walk dance move. As you listen, notice the tempo shift. The crisp original instrumental is pitched down and made into something more muddy and hypnotic."
     },
 
@@ -60,6 +67,7 @@ const data = {
         "image": "https://lh3.googleusercontent.com/proxy/ALWe-6vXmsqe_vnqKgAjBKQFraXfCpajo25oUkuP-pbxodMraf7u0Eomp0x1mqtImVrhKQdbc9WCVi4JNdDvTj1lCzqlAHr35ZHUh2l-O-RGofosCWDQz7bpJ87wgC5XIkU8",
         "time": 29,
         "year": 2014,
+        "artist": "Big Freedia",
         "description": "Coming out of the hypermasculinity of the Bounce genre in the late 90s/early 2000s, Big Freedia revolutionized the genre by bringing elements of queerness and femininity into its mainstream. After Hurricane Katrina in 2005, Big Freedia and other artists brought the sound of Bounce to Houston, where it influenced the music of artists like Beyoncé. Listen for all of the characteristics of modern bounce tracks, such as the use of call-and-response and choppy vocal loops."
     },
 
@@ -68,6 +76,7 @@ const data = {
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0QZZ4lPRHmQOkKtF1uCIXfmctITc7xWo-dQ&s",
         "time": 37,
         "year": 2022,
+        "artist": "Beyoncé",
         "description": "Though not a bounce track, Beyoncé's \"Break My Soul\" is a prime example of how the New Orleans Bounce genre has influenced the sound of music across the country. Bounce was introduced to Houston after Hurricane Katrina in 2005, and the genre has heavily shaped Beyoncé's sound. By directly sampling Big Freedia's \"Explode\", Beyoncé uses this track to highlight the importance of black queerness in club music."
     },
 }

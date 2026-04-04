@@ -236,10 +236,15 @@ export class Canvas {
         this.context.textBaseline = "top"
         this.context.fillText(songName, boxX + POPUP_PAD, boxTop + POPUP_PAD)
 
+        // Artist
+        this.context.font = "italic 16px Roboto"
+        this.context.fillStyle = "#333333"
+        this.context.fillText(songData["artist"] || "", boxX + POPUP_PAD, boxTop + POPUP_PAD + 32)
+
         // Year
         this.context.font = "16px Roboto"
         this.context.fillStyle = "#555555"
-        this.context.fillText(String(songData["year"]), boxX + POPUP_PAD, boxTop + POPUP_PAD + 32)
+        this.context.fillText(String(songData["year"]), boxX + POPUP_PAD, boxTop + POPUP_PAD + 55)
 
         // Description (starts below the image area)
         this.context.font = "13px Roboto"
@@ -247,7 +252,7 @@ export class Canvas {
         this.wrapText(
             songData["description"] || "",
             boxX + POPUP_PAD,
-            boxTop + POPUP_PAD + 120,
+            boxTop + POPUP_PAD + 140,
             POPUP_W - POPUP_PAD * 2,
             19
         )
@@ -305,12 +310,12 @@ export class Canvas {
             canvas.height/2 + ((time/TIME_PER_GRID) * GRID_SIZE)
         ]
 
+        this.songsPostions[songName] = pos
+
         this.songsToRender.push({
             "pos": pos,
             "songName": songName
         })
-
-
 
         if (parent_pos != null) {
             this.context.lineWidth = 2
@@ -325,6 +330,20 @@ export class Canvas {
     }
 
     render_connections(current_song, xmin=0, xmax=1, parent_pos=null) {
+
+        // If already placed, just draw the line to its existing position
+        if (this.songsPostions[current_song]) {
+            const existing_pos = this.songsPostions[current_song]
+            if (parent_pos != null) {
+                this.context.lineWidth = 2
+                this.context.strokeStyle = '#ffffff'
+                this.context.beginPath()
+                this.context.moveTo(existing_pos[0], existing_pos[1])
+                this.context.lineTo(parent_pos[0], parent_pos[1])
+                this.context.stroke()
+            }
+            return
+        }
 
         const xmult = (xmin + xmax) / 2
         const current_pos = this.render_connection(current_song, this.songs.data[current_song]["time"], xmult, parent_pos)
@@ -367,6 +386,7 @@ export class Canvas {
         this.context.translate(this.cameraX/this.zoom, this.cameraY/this.zoom)
 
         this.depth = 0
+        this.songsPostions = {}
 
         this.render_connections("Drag Rap")
         this.create_grid()

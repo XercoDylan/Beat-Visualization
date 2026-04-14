@@ -40,7 +40,7 @@ const data = {
         "artist": "Juvenile",
         "city": "New Orleans",
         "audio": "../assets/Sounds/Back That Azz Up Cut.m4a",
-        "description": "\"Back That Azz Up\" is a track often credited for bringing New Orleans bounce into the national consciousness. Upon release in 1999, this song became inescapable in the club for much of the next decade, and is included in many DJ sets to this day. The Triggerman sample is present throughout the track, and you can hear the characteristic call and response of the Bounce genre in the chorus."
+        "description": "\"Back That Azz Up\" is a track often credited for bringing New Orleans bounce into the national consciousness. Upon release in 1999, this song became inescapable in the club for much of the next decade, and is included played in many DJ sets to this day. The Triggerman sample can be heard in the hollow bell sound that plays every measure, and you can hear the characteristic call and response of the Bounce genre in the chorus."
     },
 
     "Where Dey At": {
@@ -62,7 +62,7 @@ const data = {
         "artist": "Lil Wayne",
         "city": "New Orleans",
         "audio": "../assets/Sounds/Clap For Em Cut.m4a",
-        "description": "A victory lap for Bounce, \"Clap For Em\" is New Orleans artist Lil' Wayne's homage to the genre's biggest hits. This song directly samples not only \"Drag Rap\", but also directly samples \"Where Dey At\" and \"Back That Azz Up\" to pay respects to the lineage of the genre. Listen for the drums and accompaniment that constantly shift to reflect different tracks in the genre's history."
+        "description": "A victory lap for Bounce, \"Clap For Em\" is New Orleans artist Lil' Wayne's homage to the genre's biggest hits. This song directly samples not only \"Drag Rap\", but also directly samples \"Where Dey At\" and \"Back That Azz Up\" to pay respects to the lineage of the genre. The intro of \"Shake that ass like a salt shaker\" is lifted directly from the track \"Where Dey At\", largely considered the first Nola Bounce song, which then transitions immediately into the xylophone of the drag rap sample."
     },
 
     "Gangsta Walk": {
@@ -95,7 +95,7 @@ const data = {
         "artist": "Beyoncé",
         "city": "Houston",
         "audio": "../assets/Sounds/Break My Soul Cut.m4a",
-        "description": "Though not a bounce track, Beyoncé's \"Break My Soul\" is a prime example of how the New Orleans Bounce genre has influenced the sound of music across the country. Bounce was introduced to Houston after Hurricane Katrina in 2005, and the genre has heavily shaped Beyoncé's sound. By directly sampling Big Freedia's \"Explode\", Beyoncé uses this track to highlight the importance of black queerness in club music."
+        "description": "Though not a bounce track, Beyoncé's \"Break My Soul\" is a prime example of how the New Orleans Bounce genre has influenced the sound of music across the country. Bounce was introduced to Houston after Hurricane Katrina in 2005, and the genre has heavily shaped the sound of Beyoncé's music. By directly sampling Big Freedia's \"Explode\", Beyoncé uses this track to highlight the importance of black queerness in club music."
     },
 }
 
